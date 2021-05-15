@@ -2,6 +2,8 @@ import styled from "styled-components/macro";
 
 export const Container = styled.div`
 	display: flex;
+	/* justify-content: center;
+	align-items: center; */
 	border-bottom: solid 8px #222;
 `;
 
@@ -15,8 +17,10 @@ export const Inner = styled.div`
 
 export const Item = styled.div`
 	color: white;
+	max-width: 700px;
+	width: 100%;
+	margin: auto;
 	margin-bottom: 10px;
-	max-width: 670px;
 
 	&:first-of-type {
 		margin-top: 3em;
