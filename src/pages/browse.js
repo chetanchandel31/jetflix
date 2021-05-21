@@ -1,13 +1,15 @@
+import { BrowseContainer } from "../containers/browse";
 import { useContent } from "../hooks";
+import selectionFilter from "../utils/selection-filter";
 
 export default function Browse() {
 	//get series and films
-	//have slides
-	//pass it to browse container
 	const { series } = useContent("series");
 	const { films } = useContent("films");
-	console.log(series);
-	console.log(films);
+	//have slides
+	const slides = selectionFilter({ series, films });
+	console.log(slides);
+	//pass it to browse container
 
-	return <div>hello from browse</div>;
+	return <BrowseContainer slides={slides} />;
 }
