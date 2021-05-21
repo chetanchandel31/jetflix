@@ -50,14 +50,15 @@ export const Item = styled.li`
 	text-align: center;
 	margin-right: 30px;
 	//when there's a hover on item
+	//these styles will be applied to Picture
 	&:hover > ${Picture} {
 		border: 3px solid white;
-	} //these styles will be applied to Picture
-
+	}
+	//and these to Name. > seems to be optional
 	&:hover ${Name} {
 		font-weight: bold;
 		color: white;
-	} //and these to Name. > seems to be optional
+	}
 
 	&:last-of-type {
 		margin-right: 0;
