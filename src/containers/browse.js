@@ -2,11 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { FirebaseContext } from "../context/firebase";
 import { SelectProfileContainer } from "./profile";
 import { Header, Loading } from "../components/";
-import { ReleaseBody } from "../components/loading/styles/loading";
 import * as ROUTES from "../constants/routes";
 import logo from "../logo.svg";
 
 export function BrowseContainer({ slides }) {
+	const [searchTerm, setSearchTerm] = useState("");
 	const [profile, setProfile] = useState({});
 	const [loading, setLoading] = useState(true);
 	const { firebase } = useContext(FirebaseContext);
@@ -21,7 +21,7 @@ export function BrowseContainer({ slides }) {
 	//make it if-else
 	return profile.displayName ? (
 		<>
-			{loading ? <Loading src={user.photoURL} /> : <ReleaseBody />}
+			{loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
 			<Header src="joker1" dontShowOnSmallViewPort>
 				<Header.Frame>
 					<Header.Group>
@@ -30,12 +30,16 @@ export function BrowseContainer({ slides }) {
 						<Header.TextLink>Films</Header.TextLink>
 					</Header.Group>
 					<Header.Group>
+						<Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 						<Header.Profile>
 							<Header.Picture src={user.photoURL} />
 							<Header.Dropdown>
 								<Header.Group>
 									<Header.Picture src={user.photoURL} />
 									<Header.TextLink>{user.displayName}</Header.TextLink>
+								</Header.Group>
+								<Header.Group>
+									<Header.TextLink onClick={() => firebase.auth().signOut()}>Sign out</Header.TextLink>
 								</Header.Group>
 							</Header.Dropdown>
 						</Header.Profile>
@@ -49,6 +53,7 @@ export function BrowseContainer({ slides }) {
 						using Firebase. I love Firebase and I recommend you give it a go! This is just an important learning that I wanted to share — hopefully it can
 						prevent you from getting stuck in the same position as me.
 					</Header.Text>
+					<Header.PlayButton>Play</Header.PlayButton>
 				</Header.Feature>
 			</Header>
 		</>
