@@ -14,7 +14,7 @@ function App() {
 				<IsUserRedirect user={user} loggedInPath={ROUTES.BROWSE} path={ROUTES.SIGN_IN} exact>
 					<Signin />
 				</IsUserRedirect>
-				<IsUserRedirect user={user} loggedInPath={ROUTES.BROWSE} path={ROUTES.SIGN_IN} exact>
+				<IsUserRedirect user={user} loggedInPath={ROUTES.BROWSE} path={ROUTES.SIGN_UP} exact>
 					<Signup />
 				</IsUserRedirect>
 				<ProtectedRoute user={user} path={ROUTES.BROWSE} exact>
