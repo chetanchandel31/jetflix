@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import {
 	Background,
@@ -42,13 +42,25 @@ Header.Picture = function HeaderPicture({ src, ...restProps }) {
 Header.Search = function HeaderSearch({ searchTerm, setSearchTerm, ...restProps }) {
 	const [searchActive, setSearchActive] = useState("");
 
+	const inputRef = useRef();
+
+	useEffect(() => {
+		if (searchActive) inputRef.current.focus();
+	}, [searchActive]);
+
 	return (
 		<Search {...restProps}>
 			<SearchIcon onClick={() => setSearchActive(searchActive => !searchActive)}>
 				<img src="/images/icons/search.png" alt="Search" />
 			</SearchIcon>
 
-			<SearchInput value={searchTerm} onChange={({ target }) => setSearchTerm(target.value)} placeholder="Search films and series" active={searchActive} />
+			<SearchInput
+				ref={inputRef}
+				value={searchTerm}
+				onChange={({ target }) => setSearchTerm(target.value)}
+				placeholder="Search films and series"
+				active={searchActive}
+			/>
 		</Search>
 	);
 };

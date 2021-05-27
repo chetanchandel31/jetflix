@@ -11,7 +11,6 @@ export function ProtectedRoute({ user, children, ...rest }) {
 		<Route
 			{...rest}
 			render={({ location }) => {
-				console.log(user);
 				if (user) return children;
 
 				if (!user) return <Redirect to={{ pathname: "signin", state: { from: location } }} />; //docs for state's explanation

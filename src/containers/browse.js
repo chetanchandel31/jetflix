@@ -5,6 +5,7 @@ import { Card, Header, Loading, Player } from "../components/";
 import * as ROUTES from "../constants/routes";
 import logo from "../logo.svg";
 import { FooterContainer } from "./footer";
+import Fuse from "fuse.js";
 
 export function BrowseContainer({ slides }) {
 	const [category, setCategory] = useState("series");
@@ -25,6 +26,15 @@ export function BrowseContainer({ slides }) {
 	useEffect(() => {
 		setSlideRows(slides[category]);
 	}, [slides, category]);
+
+	useEffect(() => {
+		const fuse = new Fuse(slides[category], { keys: ["data.title"] });
+		const result = fuse.search(searchTerm).map(({ item }) => item);
+
+		if (result.length > 0 && searchTerm.length > 2) setSlideRows(result);
+		if (searchTerm.length === 0) setSlideRows(slides[category]);
+		// eslint-disable-next-line
+	}, [searchTerm]);
 
 	if (profile.displayName) {
 		return (
