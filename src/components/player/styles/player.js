@@ -29,7 +29,7 @@ export const Inner = styled.div`
 
 export const Close = styled.button`
 	position: absolute;
-	right: 15px;
+	right: 0px;
 	top: 15px;
 	width: 22px;
 	height: 22px;

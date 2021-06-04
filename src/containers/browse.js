@@ -8,7 +8,7 @@ import { FooterContainer } from "./footer";
 import Fuse from "fuse.js";
 
 export function BrowseContainer({ slides }) {
-	const [category, setCategory] = useState("series");
+	const [category, setCategory] = useState("films");
 	const [searchTerm, setSearchTerm] = useState("");
 	const [profile, setProfile] = useState({});
 	const [loading, setLoading] = useState(true);
@@ -44,11 +44,11 @@ export function BrowseContainer({ slides }) {
 					<Header.Frame>
 						<Header.Group>
 							<Header.Logo to={ROUTES.HOME} src={logo} alt="Jetflix" />
-							<Header.TextLink active={category === "series" ? "true" : "false"} onClick={() => setCategory("series")}>
-								Series
-							</Header.TextLink>
 							<Header.TextLink active={category === "films" ? "true" : "false"} onClick={() => setCategory("films")}>
 								Films
+							</Header.TextLink>
+							<Header.TextLink active={category === "series" ? "true" : "false"} onClick={() => setCategory("series")}>
+								Series
 							</Header.TextLink>
 						</Header.Group>
 						<Header.Group>
