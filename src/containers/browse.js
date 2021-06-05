@@ -70,12 +70,11 @@ export function BrowseContainer({ slides }) {
 					<Header.Feature>
 						<Header.FeatureCallOut>Watch Joker Now</Header.FeatureCallOut>
 						<Header.Text>
-							Firebase is an incredible platform, some of their recent additions like Cloud Functions for static hosting are pretty amazing. However, I’d like
-							to share a serious blindspot that I came across while preparing for a product launch. The intent of this post is in no way to discourage anyone
-							from using Firebase. I love Firebase and I recommend you give it a go! This is just an important learning that I wanted to share — hopefully it
-							can prevent you from getting stuck in the same position as me.
+							Forever alone in a crowd, failed comedian Arthur Fleck seeks connection as he walks the streets of Gotham City. Arthur wears two masks -- the one
+							he paints for his day job as a clown, and the guise he projects in a futile attempt to feel like he's part of the world around him.
 						</Header.Text>
 						<Header.PlayButton>Play</Header.PlayButton>
+						<Header.Video videoId="zAGVQLHvwOY" />
 					</Header.Feature>
 				</Header>
 

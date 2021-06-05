@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
+import reactDOM from "react-dom";
 import { Link as ReactRouterLink } from "react-router-dom";
+import YouTube from "react-youtube";
 import {
 	Background,
 	Container,
@@ -17,14 +19,24 @@ import {
 	SearchIcon,
 	SearchInput,
 	PlayButton,
+	Overlay,
+	Inner,
 } from "./styles/header";
+
+const HeaderFeatureContext = createContext();
 
 export default function Header({ bg = true, children, ...restProps }) {
 	return bg ? <Background {...restProps}>{children}</Background> : children;
 }
 
 Header.Feature = function HeaderFeature({ children, ...restProps }) {
-	return <Feature {...restProps}>{children}</Feature>;
+	const [showVideo, setShowVideo] = useState(false);
+
+	return (
+		<HeaderFeatureContext.Provider value={{ showVideo, setShowVideo }}>
+			<Feature {...restProps}>{children}</Feature>
+		</HeaderFeatureContext.Provider>
+	);
 };
 
 Header.FeatureCallOut = function HeaderFeatureCallOut({ children, ...restProps }) {
@@ -78,7 +90,36 @@ Header.TextLink = function HeaderTextLink({ children, ...restProps }) {
 };
 
 Header.PlayButton = function HeaderPlayButton({ children, ...restProps }) {
-	return <PlayButton {...restProps}>{children}</PlayButton>;
+	const { setShowVideo } = useContext(HeaderFeatureContext);
+
+	return (
+		<PlayButton {...restProps} onClick={() => setShowVideo(true)}>
+			{children}
+		</PlayButton>
+	);
+};
+
+Header.Video = function HeaderVideo({ videoId, ...restProps }) {
+	const { showVideo, setShowVideo } = useContext(HeaderFeatureContext);
+	const opts = {
+		height: "390",
+		width: "100%",
+		playerVars: {
+			// https://developers.google.com/youtube/player_parameters
+			autoplay: 1,
+		},
+	};
+
+	return showVideo
+		? reactDOM.createPortal(
+				<Overlay onClick={() => setShowVideo(false)}>
+					<Inner>
+						<YouTube {...restProps} videoId={videoId} opts={opts} />
+					</Inner>
+				</Overlay>,
+				document.body
+		  )
+		: null;
 };
 
 Header.Frame = function HeaderFrame({ children, ...restProps }) {
